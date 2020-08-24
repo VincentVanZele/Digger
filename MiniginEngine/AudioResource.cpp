@@ -4,9 +4,9 @@
 // SDL
 /*#include "SDL_mixer.h"
 
-int proxy::AudioService::m_iChannelCount = 1;
+int engine::AudioService::m_iChannelCount = 1;
 
-proxy::AudioService::AudioService()
+engine::AudioService::AudioService()
 	: m_iChannel(m_iChannelCount)
 	, m_pChunk(nullptr)
 	, m_pMusic(nullptr)
@@ -14,12 +14,12 @@ proxy::AudioService::AudioService()
 	m_iChannelCount++;
 }
 
-void proxy::AudioService::Initialize()
+void engine::AudioService::Initialize()
 {
 	Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
 }
 
-void proxy::AudioService::Delete()
+void engine::AudioService::Delete()
 {
 	for (auto sound : m_vSounds)
 	{
@@ -31,7 +31,7 @@ void proxy::AudioService::Delete()
 	}
 }
 
-void proxy::AudioService::SaveSound(std::string& filePath)
+void engine::AudioService::SaveSound(std::string& filePath)
 {
 	Mix_Chunk* chunk = Mix_LoadWAV(filePath.c_str());
 
@@ -44,7 +44,7 @@ void proxy::AudioService::SaveSound(std::string& filePath)
 	m_vSounds.push_back(chunk);
 }
 
-void proxy::AudioService::SaveMusic(std::string& filePath)
+void engine::AudioService::SaveMusic(std::string& filePath)
 {
 	Mix_Music* music = Mix_LoadMUS(filePath.c_str());
 
@@ -57,12 +57,12 @@ void proxy::AudioService::SaveMusic(std::string& filePath)
 	m_vMusics.push_back(music);
 }
 
-Mix_Chunk& proxy::AudioService::GetChunk() const
+Mix_Chunk& engine::AudioService::GetChunk() const
 {
 	return *m_pChunk;
 }
 
-_Mix_Music& proxy::AudioService::GetMusic() const
+_Mix_Music& engine::AudioService::GetMusic() const
 {
 	return *m_pMusic;
 }
@@ -72,52 +72,52 @@ void proxy::AudioService::SetChunk(Mix_Chunk* chunk)
 	m_pChunk = chunk;
 }
 
-void proxy::AudioService::SetMusic(_Mix_Music* music)
+void engine::AudioService::SetMusic(_Mix_Music* music)
 {
 	m_pMusic = music;
 }
 
-void proxy::AudioService::PlaySoundFromVect(int atIdx, int loop)
+void engine::AudioService::PlaySoundFromVect(int atIdx, int loop)
 {
 	Mix_PlayChannel(-1, m_vSounds[atIdx], loop);
 }
 
-void proxy::AudioService::PlayMusicFromVect(int atIdx, int loop)
+void engine::AudioService::PlayMusicFromVect(int atIdx, int loop)
 {
 	Mix_PlayMusic(m_vMusics[atIdx], loop);
 }
 
-void proxy::AudioService::PlaySound(int loop)
+void engine::AudioService::PlaySound(int loop)
 {
 	Mix_PlayChannel(m_iChannel, m_pChunk, loop);
 }
 
-void proxy::AudioService::PlayMusic(int loop)
+void engine::AudioService::PlayMusic(int loop)
 {
 	Mix_PlayMusic(m_pMusic, loop);
 }
 
-void proxy::AudioService::Pause()
+void engine::AudioService::Pause()
 {
 	Mix_Pause(m_iChannel);
 }
 
-bool proxy::AudioService::IsPlaying()
+bool engine::AudioService::IsPlaying()
 {
 	return Mix_Playing(m_iChannel);
 }
 
-bool proxy::AudioService::IsPaused()
+bool engine::AudioService::IsPaused()
 {
 	return Mix_Paused(m_iChannel);
 }
 
-void proxy::AudioService::StopSounds()
+void engine::AudioService::StopSounds()
 {
 	Mix_HaltChannel(-1);
 }
 
-void proxy::AudioService::StopMusic()
+void engine::AudioService::StopMusic()
 {
 	Mix_HaltMusic();
 }*/
